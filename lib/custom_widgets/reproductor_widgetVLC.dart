@@ -5,16 +5,16 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 
-class VideoPlayerWidget extends StatefulWidget {
-  const VideoPlayerWidget({
+class VideoPlayerWidget2 extends StatefulWidget {
+  const VideoPlayerWidget2({
     Key? key,
   }) : super(key: key);
 
   @override
-  VideoPlayerWidgetState createState() => VideoPlayerWidgetState();
+  VideoPlayerWidget2State createState() => VideoPlayerWidget2State();
 }
 
-class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
+class VideoPlayerWidget2State extends State<VideoPlayerWidget2> {
   ValueNotifier<bool> showNextChapterButton = ValueNotifier<bool>(false);
   late final VlcPlayerController _controller;
 

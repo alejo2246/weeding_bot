@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weeding_bot/custom%20widgets/reproductor_widget.dart';
+import 'package:weeding_bot/custom_widgets/reproductor_widgetVLC.dart';
+import 'package:weeding_bot/custom_widgets/reproductor_widget.dart';
 import 'package:weeding_bot/screens/virtual_control.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const VideoPlayerWidget(),
+      home: VideoPlayerWidget(),
     );
   }
 }

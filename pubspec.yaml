@@ -35,6 +35,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_vlc_player: ^7.4.0
+  camera: ^0.10.5+5
+  get: ^4.6.6
+  permission_handler: ^11.0.1
+  flutter_tflite: ^1.0.1
+  image: ^3.3.0
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +66,8 @@ flutter:
   assets:
     # - assets/fonts/
     # - assets/Icons/
-    - assets/images/
+    - assets/trainedModel/weedDetector.tflite
+    - assets/trainedModel/labels.txt
     - assets/videos/
     # - assets/audios/
     # - assets/lottie_animations/
