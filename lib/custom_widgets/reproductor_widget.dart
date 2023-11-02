@@ -40,12 +40,22 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     return GetBuilder<ScanController>(
         init: ScanController(),
         builder: (controller) {
+          debugPrint("lettuce in sight: ${controller.lettuceInSight}");
           return Stack(
             alignment: Alignment.bottomLeft,
             children: [
-              SizedBox(
+              Container(
                   width: screenWidth,
                   height: screenHeight,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: controller.lettuceInSight
+                          ? Colors.red
+                          : Colors.transparent, // Border color
+                      width: 10.0, // Border width
+                    ),
+                    borderRadius: BorderRadius.circular(10.0), // Border radius
+                  ),
                   child: controller.isCameraInitialized
                       ? CameraPreview(controller.cameraController)
                       : const Center(
@@ -95,6 +105,25 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   child: const Text("Deshierbar"),
                 ),
               ),
+              controller.lettuceInSight
+                  ? Align(
+                      alignment: const Alignment(0, 0.9),
+                      child: Container(
+                        height: 80,
+                        width: 200,
+                        alignment: const Alignment(0, 0),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius:
+                              BorderRadius.circular(10.0), // Border radius
+                        ),
+                        child: const Text(
+                          'Cuidado, Se ha detectado una Lechuga en rango de corte',
+                          style: TextStyle(fontSize: 15, color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                      ))
+                  : const SizedBox(),
             ],
           );
         });

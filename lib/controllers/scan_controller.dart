@@ -28,6 +28,9 @@ class ScanController extends GetxController {
   var isCameraInitialized = false;
   var cameraCount = 0;
   var detectorBusy = false;
+  final double threshold = 0.5;
+
+  bool lettuceInSight = false;
   initCamera() async {
     if (await Permission.camera.request().isGranted) {
       cameras = await availableCameras();
@@ -70,8 +73,21 @@ class ScanController extends GetxController {
           threshold: 0.1);
 
       if (detector != null) {
-        debugPrint("result is $detector");
-      } else {}
+        bool lettuceAux = false;
+        for (var obj in detector) {
+          if (obj['label'] == "1 lettuce") {
+            debugPrint("uwu");
+            lettuceAux = true;
+            debugPrint('$detector');
+          }
+        }
+        if (lettuceAux) {
+          lettuceInSight = true;
+        } else {
+          lettuceInSight = false;
+        }
+        update();
+      }
     } catch (e) {
       debugPrint("$e");
     } finally {
