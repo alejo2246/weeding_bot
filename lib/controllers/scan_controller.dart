@@ -53,6 +53,52 @@ class ScanController extends GetxController {
     update();
   }
 
+
+  objectDetectorFromWS(Stream<CameraImage> imageStream) {
+    imageStream.listen((frame) async {
+      try {
+        if (detectorBusy) {
+          debugPrint("Detector is busy, skipping");
+          return;
+        }
+        detectorBusy = true;
+        var detector = await Tflite.runModelOnFrame(
+          bytesList: frame.planes.map((e) {
+            return e.bytes;
+          }).toList(),
+          imageHeight: frame.height,
+          imageWidth: frame.width,
+          imageMean: 127.5,
+          imageStd: 127.5,
+          rotation: 0,
+          numResults: 5,
+          threshold: 0.1,
+        );
+
+        if (detector != null) {
+          bool lettuceAux = false;
+          for (var obj in detector) {
+            if (obj['label'] == "1 lettuce") {
+              debugPrint("uwu");
+              lettuceAux = true;
+              debugPrint('$detector');
+            }
+          }
+          if (lettuceAux) {
+            lettuceInSight = true;
+          } else {
+            lettuceInSight = false;
+          }
+          update();
+        }
+      } catch (e) {
+        debugPrint("$e");
+      } finally {
+        detectorBusy = false;
+      }
+    });
+  }
+
   objectDetector(CameraImage frame) async {
     try {
       if (detectorBusy) {
